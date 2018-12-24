@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>La Baffe</title>
+    <style>
+        .warp {
+            width: 100vw;
+        }
+
+        .logo {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .numbers {
+            display: flex;
+            width: 40%;
+            margin: 50px auto;
+            justify-content: space-between;
+        }
+
+        strong {
+            font-size: 40px;
+        }
+
+        span {
+            display: block;
+            width: 100%;
+        }
+        .bloc {
+            width: 100px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 100px;
+            background: #66afe9;
+        }
+    </style>
+</head>
+<body>
+<div class="warp">
+    <div class="logo">
+        <h1>La baffe de ta vie !</h1>
+    </div>
+    <div class="content">
+        <h3 class="logo">Tu Vas Prendre sa mère</h3>
+        <div class="numbers">
+            <div class="bloc" id="days"></div>
+            <div class="bloc" id="hours"></div>
+            <div class="bloc" id="minutes"></div>
+            <div class="bloc" id="seconds"></div>
+        </div>
+    </div>
+</div>
+<footer>
+
+</footer>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+    function $(select) {
+        return document.querySelector(select);
+    }
+
+        let lauch = new Date(2019,5,21,0,0,0);
+        let days = $("#days");
+        let hours = $('#hours');
+        let minutes = $('#minutes');
+        let seconds = $('#seconds');
+        function setDate() {
+            let now = new Date();
+            let s = ((lauch.getTime() - now.getTime())/1000) - now.getTimezoneOffset()*60;
+            let d = Math.floor(s/86400);
+            days.innerHTML = "<strong>" + d + "</strong><span>Jour" + (d>1?'s':'') + "</span>";
+            s -= d*86400;
+
+            let h = Math.floor(s/3600);
+            hours.innerHTML = '<strong>' + h + '</strong><span>Heure' + (h>1?'s':'') + "</span>";
+            s -= h*3600;
+
+            let m = Math.floor(s/60);
+            minutes.innerHTML = "<strong>" + m + "</strong><span>Minute" + (m>1?'s':"") + "</span>";
+            s -= m*60;
+
+            s = Math.floor(s);
+            seconds.innerHTML = '<strong>' + s + "</strong><span>Seconde" + (s>1?"s":"") + "</span>";
+            setTimeout(setDate, 1000);
+        }
+        setDate();
+</script>
+</body>
+</html>
